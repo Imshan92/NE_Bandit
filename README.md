@@ -407,7 +407,6 @@ bandit20@melissa:~$ ls
 suconnect
 bandit20@melissa:~$ ./suconnect 3222
  
-
 GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
  
