@@ -2,6 +2,7 @@ Name: M. Imshan
 
 ######Level0:
 ```
+ssh to bandit0@bandit.labs.overthewire.org using the password bandit0 and we are in our shell.
 # ssh bandit0@bandit.labs.overthewire.org
 ```
 
