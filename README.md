@@ -2,12 +2,15 @@ Name: M. Imshan
 
 ######Level0:
 ```
-ssh to bandit0@bandit.labs.overthewire.org using the password bandit0 and we are in our shell.
+ssh to bandit0@bandit.labs.overthewire.org link using the password bandit0.
+
 # ssh bandit0@bandit.labs.overthewire.org
 ```
 
 ######Level0->Level1:
 ```
+Readme file is in our home directory. Simply “cat” it and grab the password for level1.
+
 bandit0@melinda:~$ ls
 readme
 bandit0@melinda:~$ cat readme
@@ -16,6 +19,8 @@ boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 
 ######Level1->Level2:
 ```
+Password is in a file called “-“. We need to delimit the dash to read the file.
+
 bandit1@melinda:~$ ls
 -
 bandit1@melinda:~$ cat ./-
@@ -24,6 +29,8 @@ V1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 
 ######Level2->Level3:
 ```
+Need to read a file with spaces in it’s name. Let’s include the file name in quotes.
+
 bandit2@melinda:~$ ls
 spaces in this filename
 bandit2@melinda:~$ cat "spaces in this filename"
@@ -32,6 +39,8 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 
 ######Level3->Level4:
 ```
+File which is necessery is in a hidden file in the inhere directory.
+
 bandit3@melinda:~$ ls
 inhere
 bandit3@melinda:~$ cd inhere
@@ -46,6 +55,8 @@ pIwrPrtPN36QITSp3EQaw936yaFoFgAB
 
 ######Level4->Level5:
 ```
+Password is available in the inhere directory and in human readable file format in the directory. Checking for the available files.
+
 bandit4@melinda:~$ ls
 inhere
 bandit4@melinda:~$ cd inhere
@@ -80,6 +91,8 @@ koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 
 ######Level5->Level6:
 ```
+Similar as the previous, with more files and new attributes of files to look through.
+
 bandit5@melinda:~$ ls 
 inhere
 bandit5@melinda:~$ cd inhere
@@ -115,6 +128,8 @@ DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 
 ######Level6->Level7:
 ```
+The file can be anywhere on the server, but we are given it’s attributes. This is a job for find. The command attached to the end gets rid of garbage returns and allows viewing of our password file amongst several others with the same attributes.
+
 bandit6@melinda:~$ find / -user bandit7 -group bandit6 -size 33c 2>/dev/null
 /var/lib/dpkg/info/bandit7.password
 bandit6@melinda:~$ cat /var/lib/dpkg/info/bandit7.password
@@ -123,6 +138,8 @@ HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 
 ######Level7->Level8:
 ```
+Password needed for the next level is stored in the file data.txt next to the word millionth. Pipe grep is used to grep this.
+
 bandit7@melinda:~$ ls
 data.txt
 bandit7@melinda:~$ cat data.txt | grep millionth
@@ -131,6 +148,8 @@ millionth	cvX2JJa4CFALtqS87jk27qwqGhBM9plV
 
 ######Level8->Level9:
 ```
+Need to find a unique line among many available. Few commands should be piped together to do this. Note the commands do need to be in this order.
+
 bandit8@melinda:~$ ls
 data.txt
 bandit8@melinda:~$ cat data.txt | sort | uniq -u
@@ -139,6 +158,8 @@ UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
 
 ######Level9->Level10:
 ```
+Password for the next level is stored in the file data.txt among of few lines of human-readable strings starting with ‘=’ characters.
+
 bandit9@melinda:~$ ls
 data.txt
 bandit9@melinda:~$ strings data.txt | grep '='
@@ -162,6 +183,8 @@ ie)=5e
 
 ######Level10->Level11:
 ```
+Password for the next level is stored in the file data.txt and it contains base64 encoded data. File is decorded.
+
 bandit10@melinda:~$ ls
 data.txt
 bandit10@melinda:~$ base64 -d data.txt
@@ -170,6 +193,8 @@ The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 
 ######Level11->Level12:
 ```
+Password is encoded using simple rot13 encryption. And here we decode the password.
+
 bandit11@melinda:~$ ls
 data.txt
 bandit11@melinda:~$ cat data.txt | tr a-zA-Z n-za-mN-ZA-M
@@ -178,6 +203,8 @@ The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 
 ######Level12->Level13:
 ```
+Password for the next level is stored in the file data.txt, repeatedly compressed hexdump file is available. It is necessary to create a directory under /tmp using mkdir. File should be decompressed untill we achive the correct format.
+
 bandit12@melinda:~$ ls
 data.txt
 bandit12@melinda:~$ file data.txt
@@ -232,6 +259,8 @@ The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 
 ######Level13->Level14:
 ```
+Password for the next level is stored in /etc/bandit_pass/bandit14 and only can be read by user bandit14. Password for the next level is not provided, but the private SSH key can be used to log into the next level. SSH Key is essential.
+
 bandit13@melinda:~$ ls
 sshkey.private
 bandit13@melinda:~$ ssh -i sshkey.private bandit14@localhost
@@ -247,6 +276,8 @@ bandit14@melinda:~$ cat /etc/bandit_pass/bandit14
 
 ######Level14->Level15:
 ```
+Password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost. Telnet is used to connect to localhost on port 30000 and enter the password.
+
 bandit14@melinda:~$ telnet localhost 30000
 Trying 127.0.0.1...
 Connected to localhost.
@@ -260,6 +291,8 @@ Connection closed by foreign host.
 
 ######Level15->Level16:
 ```
+Password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption. SSL commands are used.
+
 bandit15@melinda:~$ openssl s_client -connect localhost:30001 -quiet
 depth=0 CN = li190-250.members.linode.com
 verify error:num=18:self signed certificate
@@ -275,6 +308,8 @@ read:errno=0
 
 ######Level16->Level17:
 ```
+The password for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Only 1 server provide the next level password, Other server will echo back what you send to it.
+
 bandit16@melinda:~$ nmap -p 31000-32000 localhost -sV
 
 Starting Nmap 6.40 ( http://nmap.org ) at 2015-08-19 10:38 UTC
@@ -357,6 +392,8 @@ bandit17@melinda:~$
 
 ######Level17->Level18:
 ```
+2 files are available in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and only one line is different between both the files passwords.old and passwords.new. Then the line which is different between both are found.
+
 bandit17@melinda:~$ ls
 passwords.new  passwords.old
 bandit17@melinda:~$ diff passwords.new passwords.old 
@@ -368,6 +405,8 @@ bandit17@melinda:~$ diff passwords.new passwords.old
 
 ######Level18->Level19:
 ```
+Password for the next level is stored in File readme in the home directory. Unfortunately, .bashrc is modified which will logout when you logged in to bandit18.
+
 Byebye !
 Connection to bandit.labs.overthewire.org closed.
 
@@ -378,6 +417,8 @@ IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
 
 ######Level19->Level20:
 ```
+setuid binary in the home directory is used to get the access to the next level. Password for this level can be found in the usual place (/etc/bandit_pass).
+
 bandit19@melinda:~$ ls
 bandit20-do
 bandit19@melinda:~$ ./bandit20-do
@@ -393,6 +434,8 @@ GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 
 ######Level20->Level21:
 ```
+setuid binary file is availble in home directory that does the following: Connection to localhost is established on the port you specify as a command line argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
+
 bandit20@melissa:~$ ls
 suconnect
 bandit20@melissa:~$ ./suconnect
