@@ -1,0 +1,161 @@
+Name: M. Imshan
+
+######Level 0 
+```
+$ ssh $leviathan0@leviathan.labs.overthewire.org.
+```
+######Level 0 -> Level 1:
+```
+leviathan0@melinda:~$ ls -la
+total 24
+drwxr-xr-x   3 root       root       4096 Nov 14  2014 .
+drwxr-xr-x 167 root       root       4096 Jul  9 16:27 ..
+drwxr-x---   2 leviathan1 leviathan0 4096 Jul 17 16:44 .backup
+-rw-r--r--   1 root       root        220 Apr  9  2014 .bash_logout
+-rw-r--r--   1 root       root       3637 Apr  9  2014 .bashrc
+-rw-r--r--   1 root       root        675 Apr  9  2014 .profile
+leviathan0@melinda:~$ cd .backup
+leviathan0@melinda:~/.backup$ ls
+bookmarks.html
+leviathan0@melinda:~/.backup$ cat bookmarks.html | grep password
+<DT><A HREF="http://leviathan.labs.overthewire.org/passwordus.html | This will be fixed later, the password for leviathan1 is rioGegei8m" ADD_DATE="1155384634" LAST_CHARSET="ISO-8859-1" ID="rdf:#$2wIU71">password to leviathan1</A>
+
+```
+
+######Level 1 -> Level 2:
+```
+leviathan1@melinda:~$ ls
+check
+leviathan1@melinda:~$ ./check
+password: love
+Wrong password, Good Bye ...
+leviathan1@melinda:~$ ltrace ./check
+__libc_start_main(0x804852d, 1, 0xffffd6f4, 0x80485f0 <unfinished ...>
+printf("password: ")                                                                             = 10
+getchar(0x8048680, 47, 0x804a000, 0x8048642password: love
+)                                                     = 108
+getchar(0x8048680, 47, 0x804a000, 0x8048642)                                                     = 111
+getchar(0x8048680, 47, 0x804a000, 0x8048642)                                                     = 118
+strcmp("lov", "sex")                                                                             = -1
+puts("Wrong password, Good Bye ..."Wrong password, Good Bye ...
+)                                                             = 29
++++ exited (status 0) +++
+leviathan1@melinda:~$ ./check
+password: sex
+$ cat /etc/leviathan_pass/leviathan2
+ougahZi8Ta
+
+```
+
+######Level 2 -> Level 3:
+```
+leviathan2@melinda:~$ ltrace ./printfile /tmp/zer0w1re123
+__libc_start_main(0x804852d, 2, 0xffffd6d4, 0x8048600 <unfinished ...>
+access("/tmp/zer0w1re123", 4)                                          = -1
+puts("You cant have that file..."You cant have that file...
+)                                     = 27
++++ exited (status 1) +++
+leviathan2@melinda:~$ ls -al
+total 28
+drwxr-xr-x   2 root       root       4096 Nov 14  2014 .
+drwxr-xr-x 167 root       root       4096 Jul  9 16:27 ..
+-rw-r--r--   1 root       root        220 Apr  9  2014 .bash_logout
+-rw-r--r--   1 root       root       3637 Apr  9  2014 .bashrc
+-rw-r--r--   1 root       root        675 Apr  9  2014 .profile
+-r-sr-x---   1 leviathan3 leviathan2 7498 Nov 14  2014 printfile
+leviathan2@melinda:~$ ./printfile /tmp/zer0w1re_test/file\ asdf
+Ahdiemoo1j
+
+```
+
+######Level 3 -> Level 4:
+```
+leviathan3@melinda:~$ ls -al
+total 32
+drwxr-xr-x   2 root       root       4096 Mar 21  2015 .
+drwxr-xr-x 167 root       root       4096 Jul  9 16:27 ..
+-rw-r--r--   1 root       root        220 Apr  9  2014 .bash_logout
+-rw-r--r--   1 root       root       3637 Apr  9  2014 .bashrc
+-rw-r--r--   1 root       root        675 Apr  9  2014 .profile
+-r-sr-x---   1 leviathan4 leviathan3 9962 Mar 21  2015 level3
+leviathan3@melinda:~$ ltrace ./level3 
+__libc_start_main(0x80485fe, 1, 0xffffd6f4, 0x80486d0 <unfinished ...>
+strcmp("h0no33", "kakaka")                                             = -1
+printf("Enter the password> ")                                         = 20
+fgets(Enter the password> asdf
+"asdf\n", 256, 0xf7fcac20)                                       = 0xffffd4ec
+strcmp("asdf\n", "snlprintf\n")                                        = -1
+puts("bzzzzzzzzap. WRONG"bzzzzzzzzap. WRONG
+)                                             = 19
++++ exited (status 0) +++
+leviathan3@melinda:~$ ./level3
+Enter the password> snlprintf
+[You've got shell]!
+$ cat /etc/leviathan_pass/leviathan4
+vuH0coox6m
+
+```
+
+######Level 4 -> Level 5:
+```
+leviathan4@melinda:~$ ls -al
+total 24
+drwxr-xr-x   3 root root       4096 Nov 14  2014 .
+drwxr-xr-x 167 root root       4096 Jul  9 16:27 ..
+-rw-r--r--   1 root root        220 Apr  9  2014 .bash_logout
+-rw-r--r--   1 root root       3637 Apr  9  2014 .bashrc
+-rw-r--r--   1 root root        675 Apr  9  2014 .profile
+dr-xr-x---   2 root leviathan4 4096 Nov 14  2014 .trash
+leviathan4@melinda:~$ cd .trash
+leviathan4@melinda:~/.trash$ ls
+bin
+leviathan4@melinda:~/.trash$ ./bin
+01010100 01101001 01110100 01101000 00110100 01100011 01101111 01101011 01100101 01101001 00001010
+
+```
+
+######Level 5 -> Level 6:
+```
+leviathan5@melinda:~$ ls -al
+total 28
+drwxr-xr-x   2 root       root       4096 Nov 14  2014 .
+drwxr-xr-x 167 root       root       4096 Jul  9 16:27 ..
+-rw-r--r--   1 root       root        220 Apr  9  2014 .bash_logout
+-rw-r--r--   1 root       root       3637 Apr  9  2014 .bashrc
+-rw-r--r--   1 root       root        675 Apr  9  2014 .profile
+-r-sr-x---   1 leviathan6 leviathan5 7634 Nov 14  2014 leviathan5
+leviathan5@melinda:~$ ./leviathan5 
+Cannot find /tmp/file.log
+leviathan5@melinda:~$ ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log
+leviathan5@melinda:~$ ./leviathan5 
+UgaoFee4li
+
+```
+
+######Level 6 -> Level 7:
+```
+leviathan6@melinda:~$ ls -al
+total 28
+drwxr-xr-x   2 root       root       4096 Nov 14  2014 .
+drwxr-xr-x 167 root       root       4096 Jul  9 16:27 ..
+-rw-r--r--   1 root       root        220 Apr  9  2014 .bash_logout
+-rw-r--r--   1 root       root       3637 Apr  9  2014 .bashrc
+-rw-r--r--   1 root       root        675 Apr  9  2014 .profile
+-r-sr-x---   1 leviathan7 leviathan6 7484 Nov 14  2014 leviathan6
+leviathan6@melinda:~$ ./leviathan6 
+usage: ./leviathan6 <4 digit code>
+leviathan6@melinda:~$ for i in {0000..9999}; do ./leviathan6 $i; echo $i; done
+0000
+Wrong
+0001
+Wrong
+.
+.
+.
+7121
+Wrong
+7122
+$ cat /etc/leviathan_pass/leviathan7
+ahy7MaeBo9
+
+```
